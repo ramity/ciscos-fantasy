@@ -1,0 +1,32 @@
+services:
+
+  ciscos_fantasy:
+    build:
+      context: ./
+      dockerfile: docker/ciscos_fantasy/Dockerfile
+    container_name: ciscos_fantasy
+    image: ciscos_fantasy
+    ports:
+      - 25565:25565
+    environment:
+      EULA: True
+      INIT_MEMORY: 16G
+      MAX_MEMORY: 24G
+      TYPE: AUTO_CURSEFORGE
+      CF_PAGE_URL: https://www.curseforge.com/minecraft/modpacks/ciscos-adventure-rpg-ultimate/download/6371759
+      # VERSION: "1.19.2"
+      # FORGE_VERSION: "47.4.0"
+      # CF_SERVER_MOD: "Cisco's Fantasy Medieval RPG [Ultimate]-V7b.zip"
+
+    # RAM-DISK
+    # volumes:
+    # - ./ram_disk:/data
+
+    # DATA FS:
+    volumes:
+    - ./data:/data
+    restart: unless-stopped
+
+networks:
+  default:
+    name: ciscos_fantasy
